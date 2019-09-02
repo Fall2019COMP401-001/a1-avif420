@@ -7,7 +7,7 @@ public class A1Jedi {
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
-
+		
 		// record the items in the shop
 		int storeStockCount = scan.nextInt();
 		String[] storeStock = new String[storeStockCount];
@@ -25,11 +25,14 @@ public class A1Jedi {
 			scan.next();
 			int numberItems = scan.nextInt();
 					
-
+			boolean[] antiRepeat = new boolean[storeStockCount];
 			for (int j = 0 ; j < numberItems ; j++) {
 				int itemCount = scan.nextInt();
 				String itemName = scan.next();
-				customersBought[stockIndex(storeStock, itemName)] += 1;
+				if (!antiRepeat[stockIndex(storeStock, itemName)]) {
+					customersBought[stockIndex(storeStock, itemName)] += 1;
+					antiRepeat[stockIndex(storeStock, itemName)] = true;
+				}
 				totalBought[stockIndex(storeStock, itemName)] += itemCount;
 			}		
 		}
