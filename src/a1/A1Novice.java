@@ -43,7 +43,6 @@ public class A1Novice {
 			System.out.println(finalOutput[k]);
 		}
 		
-		// """""Your code follows here.""""" xd
 		
 	}
 }

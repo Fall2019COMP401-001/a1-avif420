@@ -6,55 +6,56 @@ public class A1Adept {
 
 	public static void main(String[] args) {
 		
-		Scanner scan = new Scanner(System.in);
+	Scanner scan = new Scanner(System.in);
 // record the items in the shop
-		int storeStockCount = scan.nextInt();
-		String[] storeStock = new String[storeStockCount];
-		double[] storePrices = new double[storeStockCount];
-		for (int i = 0 ; i < storeStockCount ; i++) {
-			storeStock[i] = scan.next();
-			storePrices[i] = scan.nextDouble();
+	int storeStockCount = scan.nextInt();
+	String[] storeStock = new String[storeStockCount];
+	double[] storePrices = new double[storeStockCount];
+	for (int i = 0 ; i < storeStockCount ; i++) {
+		storeStock[i] = scan.next();
+		storePrices[i] = scan.nextDouble();
+	}
+
+	int numberCustomers = scan.nextInt();
+	double[] customerCosts = new double[numberCustomers];
+	String[] customerList = new String[numberCustomers];
+		
+	for (int i = 0 ; i < numberCustomers ; i++) {
+		// for each customer, check their name and initialize
+		customerList[i] = scan.next() + " " + scan.next();
+		int numberItems = scan.nextInt();
+		double personalCost = 0;
+			
+			
+
+		for (int j = 0 ; j < numberItems ; j++) {
+			// for each item, calculate cost
+			int itemCount = scan.nextInt();
+			String itemName = scan.next(); 
+			personalCost += itemCount * storePrices[stockIndex(storeStock, itemName)];
 		}
 
-		int numberCustomers = scan.nextInt();
-		double[] customerCosts = new double[numberCustomers];
-		String[] customerList = new String[numberCustomers];
-		
-		for (int i = 0 ; i < numberCustomers ; i++) {
-			// for each customer, check their name and initialize
-			customerList[i] = scan.next() + " " + scan.next();
-			int numberItems = scan.nextInt();
-			double personalCost = 0;
+		customerCosts[i] = personalCost;
 			
-			
+	}
+	scan.close();
 
-			for (int j = 0 ; j < numberItems ; j++) {
-				// for each item, calculate cost
-				int itemCount = scan.nextInt();
-				String itemName = scan.next(); 
-				personalCost += itemCount * storePrices[stockIndex(storeStock, itemName)];
-			}
-
-			customerCosts[i] = personalCost;
-			
-		}
-		scan.close();
-
-		double largePersonPrice = maxi(customerCosts);
-		System.out.println("Biggest: " + customerList[identifyPosition(customerCosts, largePersonPrice)] +
-				" (" + String.format("%.2f", largePersonPrice) + ")");
+	double largePersonPrice = maxi(customerCosts);
+	System.out.println("Biggest: " + customerList[identifyPosition(customerCosts, largePersonPrice)] +
+			" (" + String.format("%.2f", largePersonPrice) + ")");
 		
 		
-		double smallPersonPrice = mini(customerCosts);
-		System.out.println("Smallest: " + customerList[identifyPosition(customerCosts, smallPersonPrice)] + 
-				" (" + String.format("%.2f", smallPersonPrice) + ")");
+	double smallPersonPrice = mini(customerCosts);
+	System.out.println("Smallest: " + customerList[identifyPosition(customerCosts, smallPersonPrice)] + 
+			" (" + String.format("%.2f", smallPersonPrice) + ")");
 		
 		
-		System.out.println("Average: " + String.format("%.2f", average(customerCosts)));
+	System.out.println("Average: " + String.format("%.2f", average(customerCosts)));
 		
 	}
 	
 	public static double average(double[] array) {
+		// takes the average of all numbers in a double array.
 		double avarice = 0 ;
 		for (int i = 0 ; i < array.length ; i++) {
 			avarice += array[i];
@@ -64,7 +65,7 @@ public class A1Adept {
 	}
 	
 	public static double mini(double[] array) {
-		
+		// returns the smallest number in a double array. Empty arrays will return 2^63.
 		double minimum = Long.MAX_VALUE; // setting this to zero is okay because the input for this function is money
 
 		for (int i = 0 ; i < array.length ; i++) {
@@ -74,6 +75,7 @@ public class A1Adept {
 	}
 	
 	public static double maxi(double[] array) {
+		// returns the largest number in a double array. Empty arrays will return -2^63.
 		
 		double maximum = Long.MIN_VALUE; 
 		
@@ -84,6 +86,7 @@ public class A1Adept {
 	}
 	
 	public static int identifyPosition(double[] dbarray, double item) {
+		// returns the index of a double in double[]
 		for (int i = 0 ; i < dbarray.length ; i++) {
 //			System.out.println(dbarray[i]);
 //			System.out.println(item);
@@ -97,6 +100,7 @@ public class A1Adept {
 
 	
 	public static int stockIndex(String[] strarray, String item) {
+		// returns the index of a String in String[]
 		for (int i = 0 ; i < strarray.length ; i++) {
 			if (strarray[i].equals(item)) {
 				return i;
